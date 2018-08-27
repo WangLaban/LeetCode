@@ -10,7 +10,10 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 */
-
+/*
+Time complexity : O(n^2). For each element, we try to find its complement by looping through the rest of array which takes O(n) time. Therefore, the time complexity is O(n^2).
+Space complexity : O(1). 
+*/
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
