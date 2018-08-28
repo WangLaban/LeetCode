@@ -7,7 +7,8 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 */
 /*
-Time complexity : O(n). We traverse the list containing n elements exactly twice. Since the hash table reduces the look up time to O(1), the time complexity is O(n).
+Time complexity : O(nlogN). We traverse the list containing n elements exactly twice. Since the Reb_Black_Tree reduces the look up time to O(logN), the time complexity is O(nlogN).
+Besides, hash table can reduces the look up time to O(1), so if we use hash_map, the time complexity will be O(n).
 Space complexity : O(n). The extra space required depends on the number of items stored in the hash table, which stores exactly n elements. 
 */
 class Solution {
