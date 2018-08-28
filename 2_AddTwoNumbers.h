@@ -21,7 +21,7 @@ Space complexity : O(max(m,n)). The length of the new list is at most max(m,n)+1
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode *outList = new ListNode(0);
+        ListNode *outList = new ListNode(0);  //Construction initiation, the node is not used, so any Int type value is OK
         ListNode *curr = outList;
         int carry = 0;
         while(l1 != NULL || l2 != NULL)
