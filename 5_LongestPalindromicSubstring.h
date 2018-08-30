@@ -12,7 +12,9 @@ Output: "bb"
 Time complexity : O(n^2). Since expanding a palindrome around its center could take O(n) time, the overall complexity is O(n^2).
 Space complexity : O(1). 
 */
-int expandAroundCenter(string s, int left, int right)
+// Method: Expand Around Center
+// 1. Input: babad  Output: aba
+/*int expandAroundCenter(string s, int left, int right)
 {
     int L = left, R = right;
     while(L >= 0 && R < s.length() && s[L] == s[R])
@@ -41,5 +43,35 @@ public:
             }
         }
         return s.substr(start, end - start + 1);
+    }
+};*/
+// 2. https://articles.leetcode.com/longest-palindromic-substring-part-i
+// Input: babad  Output: bab
+string expandAroundCenter(string s, int c1, int c2) {
+  int l = c1, r = c2;
+  int n = s.length();
+  while (l >= 0 && r <= n-1 && s[l] == s[r]) {
+    l--;
+    r++;
+  }
+  return s.substr(l+1, r-l-1);
+}
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.length();
+        if (n == 0) return "";
+        string longest = s.substr(0, 1);  // a single char itself is a palindrome
+        for (int i = 0; i < n-1; i++) {
+            string p1 = expandAroundCenter(s, i, i);
+            if (p1.length() > longest.length())
+                longest = p1;
+            
+            string p2 = expandAroundCenter(s, i, i+1);
+            if (p2.length() > longest.length())
+                longest = p2;
+        }
+        return longest;
     }
 };
