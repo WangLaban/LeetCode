@@ -17,6 +17,7 @@ You may not alter the values in the list's nodes, only nodes itself may be chang
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// Solution1: mySolution
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
@@ -55,5 +56,36 @@ public:
         //if(head)  // If len % k == 0, we should assign NULL to cur->next
             cur->next = head;
         return dummy->next;
+    }
+};
+// Solution2: https://github.com/leetcoders/LeetCode/blob/master/ReverseNodesinkGroup.h
+class Solution {
+public:
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        if (k <= 1) return head;
+        int reverseTimes = GetLength(head) / k;
+        ListNode dummy(0); dummy.next = head;
+        ListNode *ins = &dummy, *cur = ins->next;
+        while (reverseTimes--) 
+        {
+            for (int i = 0; i < k - 1; ++i) {
+                ListNode *move = cur->next;
+                cur->next = move->next;
+                move->next = ins->next;
+                ins->next = move;
+            }
+            ins = cur;
+            cur = ins->next;
+        }
+        return dummy.next;
+    }
+
+    int GetLength(ListNode *head) {
+        int length = 0;
+        while (head) {
+            head = head->next;
+            length++;
+        }
+        return length;
     }
 };
