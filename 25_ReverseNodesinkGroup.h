@@ -71,7 +71,7 @@ public:
             for (int i = 0; i < k - 1; ++i) {
                 ListNode *move = cur->next;
                 cur->next = move->next;
-                move->next = ins->next;
+                move->next = ins->next;  // If modified to move->next = cur, wrong answer will return
                 ins->next = move;
             }
             ins = cur;
