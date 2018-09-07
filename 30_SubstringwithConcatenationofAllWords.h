@@ -13,6 +13,7 @@ Input:
   words = ["word","student"]
 Output: []
 */
+// Use map to replace unordered_map is also OK.
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
@@ -32,7 +33,7 @@ public:
             for(j = 0; j < M; j++)
             {
                 string sub = s.substr(i + j * N, N);
-                unordered_map<string, int>::iterator it = need.find(sub);
+                unordered_map<string, int>::iterator it = need.find(sub);  // auto it = need.find(sub);
                 if(it == need.end())
                     break;
                 if(need[sub] <= found[sub])
