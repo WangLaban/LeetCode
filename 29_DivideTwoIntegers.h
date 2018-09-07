@@ -13,6 +13,39 @@ Both dividend and divisor will be 32-bit signed integers.
 The divisor will never be 0.
 Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.
 */
+// Solution1: mySolution
+/*class Solution{
+public:
+    int divide(int dividend, int divisor)
+    {
+        assert(divisor != 0);
+        if(dividend == 0)
+            return 0;
+        // overflow case: only when INT_MIN / -1
+        if(dividend == INT_MIN && divisor == -1)
+            return INT_MAX;
+        // Time Limit Exceeded case: INT_MAX / 1
+        if(divisor == 1)
+            return dividend;
+        if(divisor == -1)
+            return -dividend;
+        
+        bool negative = false;
+        if((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0))
+            negative = true;
+        long long dividendI = abs((long long)dividend);
+        long long divisorI = abs((long long)divisor);
+        int result = 0;
+        while(dividendI >= divisorI)
+        {
+            dividendI -= divisorI;
+            result++;
+        }
+        return negative ? -result : result;
+    }
+};*/
+
+// Solution2: refer to https://github.com/leetcoders/LeetCode/blob/master/DivideTwoIntegers.h
 class Solution {
 public:
     int divide(int dividend, int divisor) {
@@ -26,7 +59,7 @@ public:
         
         long long result = 0;
         
-        while(dividendI >= divisorI)  // If use "dividendI -= divisorI" will cause Time Limit Exceeded
+        while(dividendI >= divisorI)
         {
             long long c = divisorI;
             for(int i = 0; (c << i) <= dividendI; i++)
