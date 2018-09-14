@@ -81,7 +81,7 @@ public:
 bool isVaild(int board[], int row, int col)
 {
     for(int i = 0; i < row; i++)
-        if(board[i] == col || row - i == abs(col - board[i]))
+        if(board[i] == col || row - i == abs(col - board[i]))  //对角线，行相减的绝对值等于列相减的绝对值
             return false;
     return true;
 }
