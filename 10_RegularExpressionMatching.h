@@ -45,19 +45,6 @@ public:
         if(p.empty())
             return s.empty();
         
-        /*
-        if(s.empty())
-        {
-            if(p[p.length() - 1] != '*')
-                return false;
-            for(int i = 0; i < p.length() - 1; i++)
-            {
-                if(p[i] != '*' && p[i + 1] != '*')
-                    return false;
-            }
-            return true;
-        }*/
-        
         int n = s.length(), m = p.length();
         
         //bool first_match = (s[0] == p[0] || p[0] == '.');
