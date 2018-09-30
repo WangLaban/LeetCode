@@ -45,8 +45,9 @@ public:
         return root == NULL ? true : isValidBSTRe(root, NULL, NULL);
     }
 };*/
+
 // Solution2: Inorder traversal
-void Inorder(TreeNode* root, vector<int>& vals)
+/*void Inorder(TreeNode* root, vector<int>& vals)
 {
     if(root == NULL)
         return;
@@ -65,6 +66,30 @@ public:
         {
             if(vals[i] >= vals[i + 1])
                 return false;
+        }
+        return true;
+    }
+};*/
+
+// Solution3: Non-recursion with stack
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        stack<TreeNode*> st;
+        TreeNode *cur = root, *pre = NULL;
+        while(cur || !st.empty())
+        {
+            while(cur)
+            {
+                st.push(cur);
+                cur = cur->left;
+            }
+            TreeNode *temp = st.top();
+            st.pop();
+            if(pre && pre->val >= temp->val)
+                return false;
+            pre = temp;
+            cur = temp->right;
         }
         return true;
     }
