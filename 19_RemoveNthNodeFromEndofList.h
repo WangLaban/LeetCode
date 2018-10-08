@@ -21,7 +21,8 @@ Space complexity : O(1). We only used constant extra space.
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+// Solution1:
+/*class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode *dummy = new ListNode(0);
@@ -41,6 +42,30 @@ public:
             head = head->next;
         }
         head->next = head->next->next;
+        return dummy->next;
+    }
+};*/
+
+// Solution2:
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *dummy = new ListNode(0);
+        dummy->next = head;
+        
+        ListNode *first = dummy;
+        ListNode *second = dummy;
+        //for(int i = 0; i <= n && first != NULL; i++)
+        for(int i = 0; i <= n; i++)
+        {
+            first = first->next;
+        }
+        while(first != NULL)
+        {
+            first = first->next;
+            second = second->next;
+        }
+        second->next = second->next->next;
         return dummy->next;
     }
 };
