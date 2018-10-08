@@ -18,7 +18,7 @@ You may not alter the values in the list's nodes, only nodes itself may be chang
  * };
  */
 // Solution1: mySolution
-class Solution {
+/*class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         if(k == 0 || k == 1 || !head)
@@ -57,9 +57,10 @@ public:
             cur->next = head;
         return dummy->next;
     }
-};
+};*/
+
 // Solution2: https://github.com/leetcoders/LeetCode/blob/master/ReverseNodesinkGroup.h
-class Solution {
+/*class Solution {
 public:
     ListNode *reverseKGroup(ListNode *head, int k) {
         if (k <= 1) return head;
@@ -87,5 +88,35 @@ public:
             length++;
         }
         return length;
+    }
+};*/
+
+// Solution3:
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if(k <= 1 || !head)
+            return head;
+        ListNode *p = head;
+        for(int i = 0; i < k; i++)
+        {
+            if(!p)
+                return head;
+            ListNode *t = p->next;
+            if(i == k - 1)
+                p->next = NULL;
+            p = t;
+        }
+
+        ListNode *end = reverseKGroup(p, k);
+ 
+        while(head)
+        {
+            ListNode *t = head->next;
+            head->next = end;
+            end = head;
+            head = t;
+        }
+        return end;
     }
 };
