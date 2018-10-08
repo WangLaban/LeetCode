@@ -32,8 +32,8 @@ Input: 1994
 Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 */
-//Solution1:
-int power(int base, int n)
+// Solution1:
+/*int power(int base, int n)
 {
     int ret = 1;
     while(n--)
@@ -56,6 +56,25 @@ public:
             ret += romains[i][divisor];
             num %= power(10, i);
             i--;
+        }
+        return ret;
+    }
+};*/
+
+// Solution2:
+class Solution {
+public:
+    string intToRoman(int num) {
+        int values[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        string romans[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        string ret;
+        for(int i = 0; i < 13; i++)
+        {
+            while(num >= values[i])
+            {
+                num -= values[i];
+                ret += romans[i];
+            }
         }
         return ret;
     }
