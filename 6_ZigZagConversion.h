@@ -18,11 +18,12 @@ A   L S   I G
 Y A   H R
 P     I
 */
+// Solution1:
 /*
 Time Complexity: O(n), where n==len(s)
 Space Complexity: O(n)
 */
-class Solution {
+/*class Solution {
 public:
     string convert(string s, int numRows) {
         if(numRows == 1)
@@ -42,6 +43,34 @@ public:
         for(int i = 0; i < rows.size(); i++)
             ret += rows[i];
         
+        return ret;
+    }
+};*/
+
+// Solution2:
+/*
+Time Complexity: O(n), where n==len(s). Each index is visited once.
+Space Complexity: O(1). The return string is not considered extra space.
+*/
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows == 1)
+            return s;
+        
+        string ret;
+        int n = s.length();
+        int cycleLen = 2 * numRows - 2;
+
+        for (int i = 0; i < numRows; i++)
+        {
+            for (int j = 0; j + i < n; j += cycleLen)
+            {
+                ret += s[j + i];
+                if (i != 0 && i != numRows - 1 && j + cycleLen - i < n)
+                    ret += s[j + cycleLen - i];
+            }
+        }
         return ret;
     }
 };
