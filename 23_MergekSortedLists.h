@@ -24,7 +24,8 @@ We can merge two sorted linked list in O(1) space.
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-ListNode* mergeTwoLists(ListNode* List1, ListNode* List2)
+// Solution1:
+/*ListNode* mergeTwoLists(ListNode* List1, ListNode* List2)
 {
     ListNode *dummy = new ListNode(0);
     ListNode *head = dummy;
@@ -64,6 +65,39 @@ public:
         for(int i = 1; i < lists.size(); i++)
         {
             dummy->next = mergeTwoLists(dummy->next, lists[i]);
+        }
+        return head->next;
+    }
+};*/
+
+// Solution2:
+struct cmp{
+    bool operator()(const ListNode* l1, const ListNode* l2)
+    {
+        return l1->val > l2->val;
+    }
+};
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.size() == 0)
+            return NULL;
+        priority_queue<ListNode*, vector<ListNode*>, cmp> pq;
+        for(auto l: lists)
+        {
+            if(l)
+                pq.push(l);  // First node of every lists
+        }
+        
+        ListNode *dummy = new ListNode(0);
+        ListNode *head = dummy;
+        while(!pq.empty())
+        {
+            dummy->next = pq.top();
+            pq.pop();
+            dummy = dummy->next;
+            if(dummy->next)
+                pq.push(dummy->next);
         }
         return head->next;
     }
